@@ -53,6 +53,7 @@ st.title("🤖 Discutez avec mon profil")
 st.markdown("""
 **Hi, I'm Hanh's AI assistant!**  
 Feel free to ask me anything about her experiences, compétences, and more. 
+
 *However, I would recommend giving her a call for a personalized exchange!*
 """)
 st.divider()
