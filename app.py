@@ -11,13 +11,14 @@ st.markdown("""
     .stApp { max-width: 800px; margin: 0 auto; }
     .version-frame {
         padding: 10px;
-        border: 1px solid #ff4b4b;
-        border-radius: 5px;
-        background-color: rgba(255, 75, 75, 0.1);
+        border: 2px solid #0047AB; /* Bleu Cobalt / Électrique */
+        border-radius: 8px;
+        background-color: rgba(0, 71, 171, 0.05); /* Fond bleu très léger */
         text-align: center;
-        margin-bottom: 20px;
-        color: #ff4b4b;
+        margin-bottom: 25px;
+        color: #0047AB;
         font-size: 0.9em;
+        font-weight: bold;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -49,11 +50,10 @@ context_text = get_docs_text(["cv.pdf", "faq.pdf"])
 st.markdown('<div class="version-frame">It\'s the V0 version, please excuse for any occurred problem</div>', unsafe_allow_html=True)
 
 # 2. Greeting Message
-st.title("🤖 Discutez avec mon profil")
-st.markdown("""
-**Hi, I'm Hanh's AI assistant!**  
-Feel free to ask me anything about her experiences, compétences, and more. 
+st.title("🤖 Hi, I'm Hanh's AI assistant!")
 
+st.markdown("""
+Feel free to ask me anything about her experiences, compétences, and more. 
 *However, I would recommend giving her a call for a personalized exchange!*
 """)
 st.divider()
