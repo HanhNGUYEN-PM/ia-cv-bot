@@ -50,8 +50,7 @@ context_text = get_docs_text(["cv.pdf", "faq.pdf"])
 st.markdown('<div class="version-frame">It\'s the V.0 version, please excuse for any occurred problem</div>', unsafe_allow_html=True)
 
 # 2. Greeting Message
-st.title("🤖 Hi, I'm Hanh's AI assistant!")
-
+st.title("🤖 Hi, I'm Hanh's AI assistant!", anchor=False)
 st.markdown("""
 Feel free to ask me anything about her experiences, compétences, and more. 
 
