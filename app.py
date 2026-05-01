@@ -47,13 +47,14 @@ context_text = get_docs_text(["cv.pdf", "faq.pdf"])
 # --- INTERFACE UI ---
 
 # 1. Framed Message (Version V0)
-st.markdown('<div class="version-frame">It\'s the V0 version, please excuse for any occurred problem</div>', unsafe_allow_html=True)
+st.markdown('<div class="version-frame">It\'s the V.0 version, please excuse for any occurred problem</div>', unsafe_allow_html=True)
 
 # 2. Greeting Message
 st.title("🤖 Hi, I'm Hanh's AI assistant!")
 
 st.markdown("""
 Feel free to ask me anything about her experiences, compétences, and more. 
+
 *However, I would recommend giving her a call for a personalized exchange!*
 """)
 st.divider()
