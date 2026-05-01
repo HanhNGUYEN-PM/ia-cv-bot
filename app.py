@@ -50,7 +50,7 @@ if prompt := st.chat_input("Ex: Quelles sont ses compétences en Python ?"):
         st.markdown(prompt)
 
     # Appel au modèle Gemini 1.5 Flash (Gratuit et rapide)
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    model = genai.GenerativeModel('gemini-3-flash-preview')
     
     full_prompt = f"""
     Tu es l'assistant IA de ce candidat. Utilise les infos ci-dessous pour répondre au recruteur.
