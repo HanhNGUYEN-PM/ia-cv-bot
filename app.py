@@ -1,3 +1,6 @@
+st.set_page_config(initial_sidebar_state="collapsed")
+st.markdown("<style>#MainMenu {visibility: hidden;} footer {visibility: hidden;} header {visibility: hidden;}</style>", unsafe_allow_html=True)
+
 import streamlit as st
 import google.generativeai as genai
 from pypdf import PdfReader
