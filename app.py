@@ -62,7 +62,8 @@ st.markdown("""
     </div>
     """, unsafe_allow_html=True)
 
-st.caption("⚠️ **Notice:** This assistant uses a free API with daily limits. If you encounter any issues or a "Rate Limit" error, please feel free to return and continue our conversation tomorrow!")
+# Correction des guillemets ici : utilisation de simples ' autour de Rate Limit
+st.caption("⚠️ **Notice:** This assistant uses a free API with daily limits. If you encounter any issues or a 'Rate Limit' error, please feel free to return and continue our conversation tomorrow!")
 
 st.divider()
 
