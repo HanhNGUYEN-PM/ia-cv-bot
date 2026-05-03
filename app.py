@@ -65,6 +65,10 @@ st.markdown("""
     </div>
     """, unsafe_allow_html=True)
 
+st.caption("⚠️ **Notice:** This assistant uses a free API with daily limits. If I'm unable to respond, please come back tomorrow!")
+
+st.divider()
+
 # 2. Greeting Message (Titre sans ancre URL)
 st.title("🤖 Hi, I'm Hanh's AI assistant!", anchor=False)
 st.markdown("""
