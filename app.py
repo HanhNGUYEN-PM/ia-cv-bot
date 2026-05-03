@@ -1,22 +1,28 @@
-st.set_page_config(initial_sidebar_state="collapsed")
-st.markdown("<style>#MainMenu {visibility: hidden;} footer {visibility: hidden;} header {visibility: hidden;}</style>", unsafe_allow_html=True)
-
 import streamlit as st
 import google.generativeai as genai
 from pypdf import PdfReader
 
-# Configuration de la page
-st.set_page_config(page_title="IA Portfolio Assistant", page_icon="💼")
+# 1. UNIQUE CONFIGURATION (DOIT ÊTRE EN HAUT)
+st.set_page_config(
+    page_title="IA Portfolio Assistant", 
+    page_icon="💼", 
+    initial_sidebar_state="collapsed"
+)
 
-# --- STYLE PERSONNALISÉ ---
+# 2. MASQUER LE MENU ET STYLE PERSONNALISÉ
 st.markdown("""
     <style>
+    /* Masquer le menu Streamlit pour la confidentialité */
+    #MainMenu {visibility: hidden;} 
+    footer {visibility: hidden;} 
+    header {visibility: hidden;}
+    
     .stApp { max-width: 800px; margin: 0 auto; }
     .version-frame {
         padding: 10px;
-        border: 2px solid #0047AB; /* Bleu Cobalt / Électrique */
+        border: 2px solid #0047AB; /* Bleu Cobalt */
         border-radius: 8px;
-        background-color: rgba(0, 71, 171, 0.05); /* Fond bleu très léger */
+        background-color: rgba(0, 71, 171, 0.05);
         text-align: center;
         margin-bottom: 25px;
         color: #0047AB;
@@ -33,7 +39,7 @@ else:
     st.error("Clé API manquante dans les Secrets Streamlit !")
 
 # --- LOGIQUE D'EXTRACTION ---
-@st.cache_data # Optimisation : ne relit pas les PDF à chaque message
+@st.cache_data
 def get_docs_text(files):
     text = ""
     for file in files:
@@ -49,10 +55,10 @@ context_text = get_docs_text(["cv.pdf", "faq.pdf"])
 
 # --- INTERFACE UI ---
 
-# 1. Framed Message (Version V0)
+# 1. Message encadré bleu
 st.markdown('<div class="version-frame">It\'s the V.0 version, please excuse for any occurred problem</div>', unsafe_allow_html=True)
 
-# 2. Greeting Message
+# 2. Greeting Message (Titre sans ancre URL)
 st.title("🤖 Hi, I'm Hanh's AI assistant!", anchor=False)
 st.markdown("""
 Feel free to ask me anything about her experiences, compétences, and more. 
@@ -65,18 +71,17 @@ st.divider()
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Affichage des messages passés
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# 3. Chat Input avec le nouveau texte
+# 3. Chat Input
 if prompt := st.chat_input("Type your question here..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # Appel au modèle Gemini 3 Flash Preview (ID vérifié sur votre capture)
+    # Modèle Gemini 3 Flash Preview
     model = genai.GenerativeModel('gemini-3-flash-preview')
     
     full_prompt = f"""
