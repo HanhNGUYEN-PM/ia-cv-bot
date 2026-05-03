@@ -56,7 +56,10 @@ context_text = get_docs_text(["cv.pdf", "faq.pdf"])
 # --- INTERFACE UI ---
 
 # 1. Message encadré bleu
-st.markdown('<div class="version-frame">It\'s the V.0 version, please excuse for any occurred problem</div>', unsafe_allow_html=True)
+st.markdown('<div class="version-frame">It\'s the V.0 version, please excuse for any occurred problem
+
+            Notice: This assistant uses a free API with daily usage limits. If you encounter any issues or a 'Rate Limit' error, please feel free to return and continue our conversation tomorrowNotice: This assistant uses a free API with daily usage limits. If you encounter any issues or a 'Rate Limit' error, please feel free to return and continue our conversation tomorrow
+            </div>', unsafe_allow_html=True)
 
 # 2. Greeting Message (Titre sans ancre URL)
 st.title("🤖 Hi, I'm Hanh's AI assistant!", anchor=False)
