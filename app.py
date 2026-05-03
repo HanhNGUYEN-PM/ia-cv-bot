@@ -58,14 +58,11 @@ context_text = get_docs_text(["cv.pdf", "faq.pdf"])
 # 1. Message encadré bleu
 st.markdown("""
     <div class="version-frame">
-        It's the V.0 version, please excuse for any occurred problem.<br><br>
-        <b>Notice:</b> This assistant uses a free API with daily usage limits. 
-        If you encounter any issues or a "Rate Limit" error, please feel free to return 
-        and continue our conversation tomorrow.
+        It's the V.0 version, please excuse for any occurred problem.
     </div>
     """, unsafe_allow_html=True)
 
-st.caption("⚠️ **Notice:** This assistant uses a free API with daily limits. If I'm unable to respond, please come back tomorrow!")
+st.caption("⚠️ **Notice:** This assistant uses a free API with daily limits. If you encounter any issues or a "Rate Limit" error, please feel free to return and continue our conversation tomorrow!")
 
 st.divider()
 
