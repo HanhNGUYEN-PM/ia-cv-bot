@@ -84,31 +84,39 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
+
 # 3. Chat Input
 if prompt := st.chat_input("Type your question here..."):
+    # Affichage immédiat du message de l'utilisateur
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # Modèle Gemini 3 Flash Preview
-    model = genai.GenerativeModel('gemini-3-flash-preview')
-    
-    full_prompt = f"""
-    Tu es l'assistant IA de Hanh. Utilise les infos dans le fichier faq.pdf pour répondre au recruteur.
-    La réponse doit etre professionnelle, synthétisée et valorisante. 
-    Si tu ne sais pas, ne pas inventer la réponse et invite-le à contacter Hanh directement.
-    
-    CONTEXTE :
-    {context_text}
-    
-    QUESTION DU RECRUTEUR :
-    {prompt}
-    """
-    
-    try:
-        response = model.generate_content(full_prompt)
-        with st.chat_message("assistant"):
-            st.markdown(response.text)
-        st.session_state.messages.append({"role": "assistant", "content": response.text})
-    except Exception as e:
-        st.error(f"Désolé, une erreur est survenue : {e}")
+    # --- ÉLÉMENT DE PATIENCE ---
+    with st.chat_message("assistant"):
+        # Le spinner s'affiche ici et disparaît dès que le bloc "with" est terminé
+        with st.spinner("Hanh's assistant is thinking..."):
+            
+            # Appel au modèle Gemini
+            model = genai.GenerativeModel('gemini-3-flash-preview')
+            
+            full_prompt = f"""
+            Tu es l'assistant IA de Hanh. Utilise les infos ci-dessous pour répondre au recruteur.
+            Sois pro, concis et valorisant. Si tu ne sais pas, invite-le à contacter Hanh directement.
+            
+            CONTEXTE :
+            {context_text}
+            
+            QUESTION DU RECRUTEUR :
+            {prompt}
+            """
+            
+            try:
+                response = model.generate_content(full_prompt)
+                st.markdown(response.text)
+                # On ajoute la réponse à l'historique
+                st.session_state.messages.append({"role": "assistant", "content": response.text})
+            except Exception as e:
+                st.error(f"Désolé, une erreur est survenue : {e}")
+
+
