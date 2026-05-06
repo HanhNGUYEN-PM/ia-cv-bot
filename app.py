@@ -112,7 +112,7 @@ if prompt := st.chat_input("Type your question here..."):
             
             full_prompt = f"""
             Tu es l'assistant IA de Hanh. Utilise les infos dans le fichier faq.pdf pour répondre au recruteur.
-            La réponse doit etre professionnelle, synthétisée, fidèle aux données fournies et valorisante. Si tu ne sais pas, ne pas inventer la réponse et invite-le à contacter Hanh directement.
+            La réponse doit etre professionnelle, synthétisée, fidèle aux données fournies et valorisante. Si tu ne sais pas, ne pas inventer la réponse, dis que je connais pas la réponse et invite-le à contacter Hanh directement.
             
             CONTEXTE :
             {context_text}
