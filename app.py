@@ -16,6 +16,16 @@ st.markdown("""
     #MainMenu {visibility: hidden;} 
     footer {visibility: hidden;} 
     header {visibility: hidden;}
+
+    <style>
+    /* Masquer le bouton de gestion en bas à droite et les menus */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    
+    /* Masque spécifiquement la barre de gestion Streamlit pour vous */
+    .stAppToolbar {display: none;}
+    [data-testid="stStatusWidget"] {display: none;}
     
     .stApp { max-width: 800px; margin: 0 auto; }
     .version-frame {
