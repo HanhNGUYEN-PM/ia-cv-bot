@@ -58,7 +58,7 @@ context_text = get_docs_text(["cv.pdf", "faq.pdf"])
 # 1. Message encadré bleu
 st.markdown("""
     <div class="version-frame">
-        It's the V.0 version, please excuse for any occurred problem.
+        This is version 1.0; I’d love to hear your feedback.
     </div>
     """, unsafe_allow_html=True)
 
