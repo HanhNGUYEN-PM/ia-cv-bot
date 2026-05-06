@@ -94,8 +94,9 @@ if prompt := st.chat_input("Type your question here..."):
     model = genai.GenerativeModel('gemini-3-flash-preview')
     
     full_prompt = f"""
-    Tu es l'assistant IA de Hanh. Utilise les infos ci-dessous pour répondre au recruteur.
-    Sois pro, concis et valorisant. Si tu ne sais pas, invite-le à contacter Hanh directement.
+    Tu es l'assistant IA de Hanh. Utilise les infos dans le fichier faq.pdf pour répondre au recruteur.
+    La réponse doit etre professionnelle, synthétisée et valorisante. 
+    Si tu ne sais pas, ne pas inventer la réponse et invite-le à contacter Hanh directement.
     
     CONTEXTE :
     {context_text}
