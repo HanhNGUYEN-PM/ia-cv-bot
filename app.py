@@ -2,35 +2,27 @@ import streamlit as st
 import google.generativeai as genai
 from pypdf import PdfReader
 
-# 1. UNIQUE CONFIGURATION (DOIT ÊTRE EN HAUT)
+# 1. UNIQUE CONFIGURATION
 st.set_page_config(
     page_title="IA Portfolio Assistant", 
     page_icon="💼", 
     initial_sidebar_state="collapsed"
 )
 
-# 2. MASQUER LE MENU ET STYLE PERSONNALISÉ
+# 2. STYLE PERSONNALISÉ & MASQUAGE INTERFACE
 st.markdown("""
     <style>
-    /* Masquer le menu Streamlit pour la confidentialité */
-    #MainMenu {visibility: hidden;} 
-    footer {visibility: hidden;} 
-    header {visibility: hidden;}
-
-    <style>
-    /* Masquer le bouton de gestion en bas à droite et les menus */
+    /* Masquer les éléments de l'interface Streamlit */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
-    
-    /* Masque spécifiquement la barre de gestion Streamlit pour vous */
     .stAppToolbar {display: none;}
     [data-testid="stStatusWidget"] {display: none;}
     
     .stApp { max-width: 800px; margin: 0 auto; }
     .version-frame {
         padding: 10px;
-        border: 2px solid #0047AB; /* Bleu Cobalt */
+        border: 2px solid #0047AB;
         border-radius: 8px;
         background-color: rgba(0, 71, 171, 0.05);
         text-align: center;
@@ -65,25 +57,22 @@ context_text = get_docs_text(["cv.pdf", "faq.pdf"])
 
 # --- INTERFACE UI ---
 
-# 1. Message encadré bleu
 st.markdown("""
     <div class="version-frame">
-        This is version 1.0; I’d love to hear your feedback.
+       This is version 1.0; I’d love to hear your feedback..
     </div>
     """, unsafe_allow_html=True)
 
-# Correction des guillemets ici : utilisation de simples ' autour de Rate Limit
-st.caption("⚠️ **Notice:** This assistant uses a free API with daily limits. If you encounter any issues with 'Rate Limit', please feel free to return and continue our conversation tomorrow!")
-
-st.divider()
-
-# 2. Greeting Message (Titre sans ancre URL)
 st.title("🤖 Hi, I'm Hanh's AI assistant!", anchor=False)
+
 st.markdown("""
 Feel free to ask me anything about her experiences, compétences, and more. 
 
 *However, I would recommend giving her a call for a personalized exchange!*
 """)
+
+st.caption("⚠️ **Notice:** This assistant uses a free API with daily limits. If you encounter any issues with 'Rate Limit', please feel free to return and continue our conversation tomorrow!")
+
 st.divider()
 
 # Initialisation de l'historique
@@ -94,39 +83,48 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
+# --- LOGIQUE DE CHAT ---
 
-# 3. Chat Input
 if prompt := st.chat_input("Type your question here..."):
-    # Affichage immédiat du message de l'utilisateur
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # --- ÉLÉMENT DE PATIENCE ---
     with st.chat_message("assistant"):
-        # Le spinner s'affiche ici et disparaît dès que le bloc "with" est terminé
         with st.spinner("Hanh's assistant is thinking..."):
             
-            # Appel au modèle Gemini
             model = genai.GenerativeModel('gemini-3-flash-preview')
             
-            full_prompt = f"""
-            Tu es l'assistant IA de Hanh. Utilise les infos dans le fichier faq.pdf pour répondre au recruteur.
-            La réponse doit etre professionnelle, synthétisée, fidèle aux données fournies et valorisante. Si tu ne sais pas, ne pas inventer la réponse, dis que je connais pas la réponse et invite-le à contacter Hanh directement.
-            
-            CONTEXTE :
+            # INTÉGRATION DE VOTRE POSITIONNEMENT STRATÉGIQUE
+            system_instructions = f"""
+            You are Hanh's AI assistant. 
+            Your role is to help answer interview questions in a way that is natural, credible, confident, structured, and impact-driven.
+
+            MY POSITIONING:
+            - Project & Product Manager with 10+ years of experience (Industry & SaaS).
+            - Versatile for roles in Project Management, Product (PM/PO), Delivery, Operations, and Transformation.
+            - Differentiator: Effective in complexity, fast-changing environments, and operational optimization.
+            - Strengths: Bringing clarity to complexity, simplifying execution, and aligning teams.
+            - Tone: Pragmatic, collaborative, calm, and mature. Avoid arrogance or buzzword-heavy speech.
+
+            INFORMATION CONTEXT (Use this to answer):
             {context_text}
-            
-            QUESTION DU RECRUTEUR :
-            {prompt}
+
+            ANSWERING RULES:
+            1. Answer in the SAME LANGUAGE as the question.
+            2. Be concise but insightful (Interview-ready).
+            3. Use concrete examples from the provided context.
+            4. Balance project management, product thinking, and customer impact.
+            5. For failures: show ownership and learning. 
+            6. For conflicts: remain diplomatic and factual.
+            7. Format: Polished, executive tone, medium length. No bullet points unless necessary.
             """
+
+            full_prompt = f"{system_instructions}\n\nRECRUITER QUESTION: {prompt}"
             
             try:
                 response = model.generate_content(full_prompt)
                 st.markdown(response.text)
-                # On ajoute la réponse à l'historique
                 st.session_state.messages.append({"role": "assistant", "content": response.text})
             except Exception as e:
-                st.error(f"Désolé, une erreur est survenue : {e}")
-
-
+                st.error(f"An error occurred: {e}")
