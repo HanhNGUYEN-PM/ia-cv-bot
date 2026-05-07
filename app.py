@@ -91,7 +91,7 @@ if prompt := st.chat_input("Type your question here..."):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
-        with st.spinner("Hanh's assistant is thinking..."):
+        with st.spinner("Hanh's assistant is preparing your answer..."):
             
             model = genai.GenerativeModel('gemini-3-flash-preview')
             
