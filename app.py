@@ -59,7 +59,7 @@ context_text = get_docs_text(["cv.pdf", "faq.pdf"])
 
 st.markdown("""
     <div class="version-frame">
-       This is version 1.0; I’d love to hear your feedback..
+       This is version 1.0, I’d love to hear your feedback..
     </div>
     """, unsafe_allow_html=True)
 
