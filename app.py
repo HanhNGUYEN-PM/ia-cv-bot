@@ -112,14 +112,9 @@ if prompt := st.chat_input("Type your question here..."):
             - Transformation & optimization roles
             
             My differentiator is that I am particularly effective in:
-            - complex environments
-            - fast-changing organizations
-            - unclear or unstructured situations
             - operational optimization
             - process structuring
             - stakeholder alignment
-            - customer-facing environments
-            - high-pressure situations
             - continuous improvement
             
             I bridge:
@@ -147,7 +142,7 @@ if prompt := st.chat_input("Type your question here..."):
             - pragmatic
             - intelligent
             - structured
-            - business-oriented
+            - customer & business-oriented
             - collaborative
             - impact-driven
             - calm and mature
